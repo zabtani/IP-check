@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import classes from './Map.module.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
 function Map(props) {
   const [viewport, setViewport] = useState({
     width: '100%',
