@@ -12,18 +12,15 @@ const Result = (props) => {
             {props.data.isDataOfClient ? ' Your' : ' Searched'} IP:{' '}
             {props.data.ip}
           </h2>
-
           <h3>
             {props.data.city} - {props.data.country}
           </h3>
-          <div className={classes.imgCon}>
-            <img
-              className={classes.flag}
-              alt={props.data.country}
-              src={props.data.flag}
-            />
-            <img alt={props.data.country} src={props.data.img} />
-          </div>
+          <img
+            className={classes.flag}
+            alt={props.data.country}
+            src={props.data.flag}
+          />
+          <img alt={props.data.country} src={props.data.img} />
         </div>
       </section>
 

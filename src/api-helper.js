@@ -8,6 +8,9 @@ const defaultCountryImg =
 export const getIpData = async (ip) => {
   let result = { error: false, data: null };
   try {
+    if (ip.length > 20) {
+      throw new Error('mobile');
+    }
     const rawIpData = await fetch(
       `https://api.ipgeolocation.io/ipgeo?apiKey=8d8e8d860b914ac78cda85b380926ccb&ip=${ip}`
     );
@@ -28,7 +31,10 @@ export const getIpData = async (ip) => {
       },
     };
   } catch (e) {
-    result.error = 'Sorry,no results fot this IP address.';
+    result.error =
+      e === 'mobile'
+        ? 'App support PC IP only. Enjoy!'
+        : 'Sorry,no results fot this IP address.';
   } finally {
     return result;
   }

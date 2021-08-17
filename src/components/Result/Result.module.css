@@ -27,22 +27,15 @@
 }
 
 .result .flag {
-  height: 15%;
-  width: 15%;
+  height: 5%;
+  width: 5%;
   align-self: center;
-}
-
-.imgCon {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
 }
 
 @media only screen and (max-width: 600px) {
   .result .flag {
-    height: 30%;
-    width: 30%;
+    height: 15%;
+    width: 15%;
   }
   .result img {
     width: 40%;
