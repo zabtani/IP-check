@@ -6,8 +6,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map(props) {
   const [viewport, setViewport] = useState({
-    width: 450,
-    height: 450,
+    width: '450px',
+    height: '450px',
   });
   useEffect(() => {
     setViewport((prevState) => {
