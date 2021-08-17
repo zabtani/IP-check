@@ -53,7 +53,7 @@ function App() {
     <div className={classes.app}>
       <section>
         <div className={classes.title}>
-          <h1>Check That </h1> <LogoSvg />
+          <h1>Check that </h1> <LogoSvg />
         </div>
         <Search search={searchIpHandler} ref={inputRef} />
         <Examples fetchExample={fetchIPdata} />
