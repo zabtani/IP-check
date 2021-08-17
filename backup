@@ -1,0 +1,109 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import LogoSvg from './components/Search/LogoSvg';
+import Result from './components/Result/Result';
+import Search from './components/Search/Search';
+import Examples from './components/Examples/Examples';
+import classes from './App.module.css';
+import Map from './components/Map/Map';
+import { createApi } from 'unsplash-js';
+const unsplash = createApi({
+  accessKey: '0oJhi_V8eHNlNtyOLjykytXjPWxFd79JZ7FWUduq0vk',
+});
+const initialUserData = {
+  country: null,
+  ip: null,
+  isDataOfClient: false,
+  ready: null,
+};
+function App() {
+  const [userData, setUserData] = useState(initialUserData);
+  const [error, setError] = useState(false);
+  const inputRef = useRef();
+
+  const fetchIPdata = useCallback(async (ip, isDataOfClient) => {
+    cleanSearchBar();
+    setError(false);
+    try {
+      const rawIpData = await fetch(
+        `http://api.ipstack.com/${ip}?access_key=00dd6ff76b0c0821e3bec7289e055340`
+      );
+      const ipData = await rawIpData.json();
+      if (!ipData.country_name) {
+        throw Error();
+      }
+      const countryImgData = await unsplash.search.getPhotos({
+        query: ipData.country_name,
+      });
+      const countryImg = countryImgData.response.results[0].urls.small;
+      setUserData((prevState) => {
+        return {
+          ...prevState,
+          flag: ipData.location.country_flag,
+          img: countryImg
+            ? countryImg
+            : 'https://www.globe.gov/o/gov.globe.home.explorelearnearth.web/images/learn-earth-system-clean.png',
+          capital: ipData.city,
+          country: ipData.country_name,
+          ip: ip,
+          isDataOfClient: isDataOfClient,
+          ready: true,
+          location: {
+            latitude: ipData.latitude,
+            longitude: ipData.longitude,
+          },
+        };
+      });
+    } catch (e) {
+      setUserData(initialUserData);
+      setError('Sorry,no results fot this IP address.');
+    }
+  }, []);
+
+  const searchIpHandler = () => {
+    fetchIPdata(inputRef.current.value, false);
+  };
+  const cleanSearchBar = () => {
+    inputRef.current.value = '';
+  };
+
+  useEffect(() => {
+    const chooseUserIp = async () => {
+      const rawUserIp = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
+      let userIp = await rawUserIp.text();
+      let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/;
+      userIp = userIp.match(ipRegex)[0];
+      fetchIPdata(userIp, true);
+    };
+    chooseUserIp();
+  }, [fetchIPdata]);
+  return (
+    <div className={classes.app}>
+      <section>
+        <div className={classes.title}>
+          <h1>Check That </h1> <LogoSvg />
+        </div>
+        <Search search={searchIpHandler} ref={inputRef} />
+        <Examples fetchExample={fetchIPdata} />
+      </section>
+      <div className={classes.resultsSections}>
+        <section>
+          {userData.ready ? <Result data={userData} /> : !error && 'Loading..'}
+          {error && <p>{error}</p>}
+        </section>
+        <section>
+          {userData.ready && (
+            <Map
+              ip={userData.ip}
+              location={{
+                latitude: userData.location.latitude,
+                longitude: userData.location.longitude,
+              }}
+            />
+          )}
+        </section>
+      </div>
+    </div>
+  );
+}
+
+export default App;

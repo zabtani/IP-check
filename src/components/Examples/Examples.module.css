@@ -1,0 +1,21 @@
+.examples {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 0.5%;
+  width: 100%;
+}
+.examples button {
+  font-size: 70%;
+  padding: 0.5%;
+  margin: 0.5%;
+  width: fit-content;
+  background: #919191;
+  border: 1px solid #919191;
+}
+.examples button:hover,
+.examples button:active {
+  border: 1px solid #3a3a3a;
+  background: #3a3a3a;
+}

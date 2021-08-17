@@ -1,0 +1,10 @@
+.marker {
+  background-color: rgb(0, 177, 0);
+  border-radius: 100%;
+  width: 18px;
+  height: 18px;
+}
+b {
+  background-color: wheat;
+  color: red;
+}
