@@ -8,7 +8,7 @@ const defaultCountryImg =
 export const getIpData = async (ip) => {
   let result = { error: false, data: null };
   try {
-    if (ip.toString().length > 20) {
+    if (navigator.userAgentData.mobile) {
       throw new Error('mobile');
     }
     const rawIpData = await fetch(
