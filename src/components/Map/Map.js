@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import classes from './Map.module.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
+import { MAPBOX_API_KEY } from '../../api-config';
 function Map(props) {
   const [viewport, setViewport] = useState({
     width: '100%',
@@ -34,7 +34,7 @@ function Map(props) {
   return (
     <ReactMapGL
       mapStyle="mapbox://styles/mapbox/outdoors-v9"
-      mapboxApiAccessToken="pk.eyJ1IjoiemFidGFuaSIsImEiOiJja3NicXZjaW4wOTR3MnZxcTFkbWc0OWsxIn0.FMBuaDyD8jhKrhAVAzrJyQ"
+      mapboxApiAccessToken={MAPBOX_API_KEY}
       {...viewport}
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
     >

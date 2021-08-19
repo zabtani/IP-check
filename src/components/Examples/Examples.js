@@ -36,7 +36,7 @@ const Examples = (props) => {
           type="button"
           onClick={props.fetchExample.bind(this, example.ip, false)}
         >
-          {`${example.ip} (${example.state})`}
+          {`${example.state}/${example.ip}`}
         </button>
       ))}
     </div>

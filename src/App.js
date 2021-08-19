@@ -42,12 +42,20 @@ function App() {
   const cleanSearchBar = () => {
     inputRef.current.value = '';
   };
+
   useEffect(() => {
+    const checkMobile = () =>
+      window.innerWidth <= 450 && window.innerHeight <= 800 ? true : false;
     const chooseUserIp = async () => {
       const userIp = await getClientIp();
       fetchIPdata(userIp, true);
     };
-    chooseUserIp();
+    const isMobile = checkMobile();
+    isMobile
+      ? setError(
+          'We tried to locate your IP but you use a mobile device. this app support PC IP only. select one from the examples above or provide it via input.'
+        )
+      : chooseUserIp();
   }, [fetchIPdata]);
   return (
     <div className={classes.app}>
@@ -62,7 +70,9 @@ function App() {
       {userData.ready ? (
         <Result data={userData} />
       ) : (
-        <section>{error ? error : 'Loading IP Data..'}</section>
+        <section>
+          <p>{error ? error : 'Loading IP Data..'}</p>
+        </section>
       )}
     </div>
   );

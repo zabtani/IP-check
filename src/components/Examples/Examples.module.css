@@ -19,3 +19,12 @@
   border: 1px solid #3a3a3a;
   background: #3a3a3a;
 }
+@media only screen and (max-width: 600px) {
+  .examples {
+    padding: 1.5%;
+  }
+  .examples button {
+    padding: 1.5%;
+    margin: 1%;
+  }
+}

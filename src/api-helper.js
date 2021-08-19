@@ -1,6 +1,7 @@
 import { createApi } from 'unsplash-js';
+import { IPGEOLOCATION_API_KEY, UNSPLASH_API_KEY } from './api-config';
 const unsplash = createApi({
-  accessKey: '0oJhi_V8eHNlNtyOLjykytXjPWxFd79JZ7FWUduq0vk',
+  accessKey: UNSPLASH_API_KEY,
 });
 
 const defaultCountryImg =
@@ -8,14 +9,8 @@ const defaultCountryImg =
 export const getIpData = async (ip) => {
   let result = { error: false, data: null };
   try {
-    if (window.innerWidth <= 450 && window.innerHeight <= 800) {
-      console.log('a');
-      throw new Error(
-        'App support PC IP only.provide something to the input above. Enjoy!'
-      );
-    }
     const rawIpData = await fetch(
-      `https://api.ipgeolocation.io/ipgeo?apiKey=8d8e8d860b914ac78cda85b380926ccb&ip=${ip}`
+      `https://api.ipgeolocation.io/ipgeo?apiKey=${IPGEOLOCATION_API_KEY}&ip=${ip}`
     );
     const ipData = await rawIpData.json();
     if (!ipData.country_name) {
