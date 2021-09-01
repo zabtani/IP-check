@@ -1,30 +1,58 @@
 .examples {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
-  flex-wrap: wrap;
   padding: 0.5%;
   width: 100%;
+  margin-bottom: 3%;
 }
-.examples button {
+.examplesButton,
+.examplesCon button {
+  font-weight: bolder;
   font-size: 70%;
-  padding: 0.5%;
+  padding: 0.5% 1% 0.5% 1%;
   margin: 0.5%;
   width: fit-content;
   background: #919191;
-  border: 1px solid #919191;
+  border: 1px solid white;
 }
-.examples button:hover,
-.examples button:active {
-  border: 1px solid #3a3a3a;
+.examplesCon button:hover,
+.examplesCon button:active {
   background: #3a3a3a;
+}
+.examplesButton {
+  align-self: center;
+  padding: 1% 2% 1% 2%;
+  background: linear-gradient(
+    0deg,
+    rgba(149, 149, 149, 1) 32%,
+    rgb(56, 133, 35) 100%
+  );
+}
+.examplesButton:hover,
+.examplesButton:active {
+  background: linear-gradient(
+    0deg,
+    rgb(109, 109, 109) 32%,
+    rgb(56, 133, 35) 100%
+  );
+}
+.examplesCon {
+  background-color: rgba(88, 146, 0, 0.103);
+  margin: 1% 3% 1% 3%;
+  padding: 1% 3% 1% 3%;
+  border-radius: 15px;
 }
 @media only screen and (max-width: 600px) {
   .examples {
     padding: 1.5%;
   }
-  .examples button {
-    padding: 1.5%;
+  .examplesCon button {
+    padding: 1.5% 3% 1.5% 3%;
     margin: 1%;
+  }
+  .examplesButton {
+    margin-top: 0;
+    padding: 2% 4% 2% 4%;
   }
 }

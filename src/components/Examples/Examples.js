@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './Examples.module.css';
 const Examples = (props) => {
+  const [examplesAreOpen, setExamplesAreOpen] = useState(false);
+  const examplesButtonHandler = () => {
+    setExamplesAreOpen((prevState) => {
+      return !prevState;
+    });
+  };
   const examples = [
+    {
+      state: 'Your location',
+      ip: '',
+    },
     {
       state: 'Uruguay',
       ip: '200.108.241.198',
@@ -28,17 +38,34 @@ const Examples = (props) => {
     },
   ];
 
+  const buttonText = examplesAreOpen
+    ? 'Fold IP examples'
+    : 'Click to see IP examples';
   return (
     <div className={classes.examples}>
-      {examples.map((example) => (
-        <button
-          key={example.state}
-          type="button"
-          onClick={props.fetchExample.bind(this, example.ip, false)}
-        >
-          {`${example.state}/${example.ip}`}
-        </button>
-      ))}
+      <button
+        className={classes.examplesButton}
+        onClick={examplesButtonHandler}
+      >
+        {buttonText}
+      </button>
+      {examplesAreOpen && (
+        <div className={classes.examplesCon}>
+          {examples.map((example) => (
+            <button
+              key={example.state}
+              type="button"
+              onClick={props.fetchExample.bind(
+                this,
+                example.ip,
+                example.ip === '' ? true : false
+              )}
+            >
+              {`${example.state} ${example.ip}`}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -12,6 +12,7 @@ button {
   padding: 1%;
   border-radius: 20px;
 }
+
 section {
   display: flex;
   flex-direction: column;
@@ -20,9 +21,13 @@ section {
   max-width: 90%;
   text-align: center;
   background-color: white;
-
+  box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
   border-radius: 12px;
   overflow: hidden;
+}
+.section p {
+  width: 90%;
+  color: red !important;
 }
 .narrow {
   padding: 0;

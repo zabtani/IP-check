@@ -4,25 +4,25 @@ import Result from './components/Result/Result';
 import Search from './components/Search/Search';
 import Examples from './components/Examples/Examples';
 import classes from './App.module.css';
-import { getIpData, getClientIp } from './api-helper';
+import { getIpData } from './api-helper';
 
 const initialUserData = {
   country: null,
   ip: null,
-  isDataOfClient: false,
-  ready: null,
+  isIpOfClient: false,
+  ready: false,
 };
 function App() {
   const [userData, setUserData] = useState(initialUserData);
   const [error, setError] = useState(false);
   const inputRef = useRef();
 
-  const fetchIPdata = useCallback(async (ip, isDataOfClient) => {
+  const fetchIPdata = useCallback(async (ip, isIpOfClient) => {
     cleanSearchBar();
+    setUserData(initialUserData);
     setError(false);
-    const ipData = await getIpData(ip);
+    const ipData = await getIpData(ip, isIpOfClient);
     if (ipData.error) {
-      setUserData(initialUserData);
       setError(ipData.error);
     } else {
       setUserData((prevState) => {
@@ -30,7 +30,7 @@ function App() {
           ...prevState,
           ready: true,
           ip: ip,
-          isDataOfClient: isDataOfClient,
+          isIpOfClient: isIpOfClient,
           ...ipData.data,
         };
       });
@@ -44,18 +44,7 @@ function App() {
   };
 
   useEffect(() => {
-    const checkMobile = () =>
-      window.innerWidth <= 450 && window.innerHeight <= 800 ? true : false;
-    const chooseUserIp = async () => {
-      const userIp = await getClientIp();
-      fetchIPdata(userIp, true);
-    };
-    const isMobile = checkMobile();
-    isMobile
-      ? setError(
-          'We tried to locate your IP but you use a mobile device. this app support PC IP only. select one from the examples above or provide it via input.'
-        )
-      : chooseUserIp();
+    fetchIPdata('', true);
   }, [fetchIPdata]);
   return (
     <div className={classes.app}>
