@@ -7,7 +7,6 @@
   align-items: center;
   width: 100%;
   background-color: whitesmoke;
-
   border-radius: 12px;
   text-align: center;
 }
@@ -20,7 +19,8 @@
   margin: 0.5%;
 }
 i {
-  font-weight: bolder;
+  font-size: 65%;
+  margin: 0.3%;
 }
 .result h3 {
   color: #248507;
@@ -30,7 +30,7 @@ i {
 .result img {
   border-radius: 5%;
   width: 20%;
-  margin: 2%;
+  margin: 2% 0 0 0;
 }
 
 .result .flag {

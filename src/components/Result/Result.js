@@ -8,7 +8,7 @@ const Result = (props) => {
       <section>
         <div className={classes.result}>
           <h2>
-            Results for {props.data.isIpOfClient && ' Your IP'}
+            Results for {props.data.isIpOfClient && ' Your IP '}
             {props.data.ip}
           </h2>
           <h3>
@@ -19,8 +19,8 @@ const Result = (props) => {
             alt={props.data.country}
             src={props.data.flag}
           />
-          <i>Random picture from {props.data.country}</i>
           <img alt={props.data.country} src={props.data.img} />
+          <i>Picture of {props.data.country}</i>
         </div>
       </section>
 

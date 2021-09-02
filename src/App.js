@@ -7,8 +7,6 @@ import classes from './App.module.css';
 import { getIpData } from './api-helper';
 
 const initialUserData = {
-  country: null,
-  ip: null,
   isIpOfClient: false,
   ready: false,
 };
@@ -25,14 +23,10 @@ function App() {
     if (ipData.error) {
       setError(ipData.error);
     } else {
-      setUserData((prevState) => {
-        return {
-          ...prevState,
-          ready: true,
-          ip: ip,
-          isIpOfClient: isIpOfClient,
-          ...ipData.data,
-        };
+      setUserData({
+        ready: true,
+        isIpOfClient: isIpOfClient,
+        ...ipData.data,
       });
     }
   }, []);

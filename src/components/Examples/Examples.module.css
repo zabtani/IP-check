@@ -14,7 +14,8 @@
   margin: 0.5%;
   width: fit-content;
   background: #919191;
-  border: 1px solid white;
+  border: 1px solid transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 .examplesCon button:hover,
 .examplesCon button:active {

@@ -33,6 +33,7 @@ function Map(props) {
 
   return (
     <ReactMapGL
+      scrollZoom={false}
       mapStyle="mapbox://styles/mapbox/outdoors-v9"
       mapboxApiAccessToken={MAPBOX_API_KEY}
       {...viewport}
